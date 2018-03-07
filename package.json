@@ -16,14 +16,16 @@
         "url": "https://github.com/mekhonoshyn/gulp-purge-source-maps/issues"
     },
     "homepage": "https://github.com/mekhonoshyn/gulp-purge-source-maps",
-    "devDependencies": {
-        "babel-cli": "^6.26.0",
-        "babel-preset-env": "^1.6.1",
+    "dependencies": {
         "del": "^3.0.0",
         "gulp": "^3.9.1",
         "gulp-decomment": "^0.2.0",
         "gulp-util": "^3.0.8",
         "merge-stream": "^1.0.1",
         "through2": "^2.0.3"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.6.1"
     }
 }
