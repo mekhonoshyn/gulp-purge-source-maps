@@ -30,8 +30,9 @@ function purgeSourceMaps({sourcesType, manifestPath, sourcesPath}) {
                     const transformedJson = Object.entries(untransformedJson)
                         .filter(([, value]) => !value.endsWith(`.${sourcesType}.map`))
                         .reduce((accumulator, [key, value]) => Object.assign(accumulator, {[key]: value}), {});
+                    const content = JSON.stringify(transformedJson, null, 2);
 
-                    fileObject.contents = Buffer.from(JSON.stringify(transformedJson, null, 2));
+                    fileObject.contents = Buffer.from(content);
 
                     this.push(fileObject);
 
