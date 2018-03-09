@@ -22,7 +22,9 @@ var _through = require('through2');
 
 var _through2 = _interopRequireDefault(_through);
 
-var _gulpUtil = require('gulp-util');
+var _pluginError = require('plugin-error');
+
+var _pluginError2 = _interopRequireDefault(_pluginError);
 
 var _gulpDecomment = require('gulp-decomment');
 
@@ -53,7 +55,7 @@ function purgeSourceMaps(_ref) {
         var manifestStream = _gulp2.default.src(manifestPath).pipe(function () {
             return _through2.default.obj(function (fileObject, encoding, callback) {
                 if (!fileObject.isBuffer()) {
-                    return callback(new _gulpUtil.PluginError(PLUGIN_NAME, 'Non-Buffer content is not supported'));
+                    return callback(new _pluginError2.default(PLUGIN_NAME, 'Non-Buffer content is not supported'));
                 }
 
                 try {
@@ -70,14 +72,15 @@ function purgeSourceMaps(_ref) {
 
                         return Object.assign(accumulator, _defineProperty({}, key, value));
                     }, {});
+                    var content = JSON.stringify(transformedJson, null, 2);
 
-                    fileObject.contents = Buffer.from(JSON.stringify(transformedJson, null, 2));
+                    fileObject.contents = Buffer.from(content);
 
                     this.push(fileObject);
 
                     return callback();
                 } catch (error) {
-                    return callback(new _gulpUtil.PluginError(PLUGIN_NAME, error));
+                    return callback(new _pluginError2.default(PLUGIN_NAME, error));
                 }
             });
         }()).pipe(_gulp2.default.dest(_path2.default.parse(manifestPath).dir));

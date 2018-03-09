@@ -2,7 +2,7 @@ import del from 'del';
 import path from 'path';
 import gulp from 'gulp';
 import through2 from 'through2';
-import {PluginError} from 'gulp-util';
+import PluginError from 'plugin-error';
 import decomment from 'gulp-decomment';
 import mergeStream from 'merge-stream';
 
