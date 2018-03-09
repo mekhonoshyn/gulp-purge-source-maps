@@ -57,10 +57,9 @@ function purgeSourceMaps(_ref) {
                 }
 
                 try {
-                    var untransformedJson = JSON.parse(fileObject.contents.toString('utf8'));
+                    var untransformedJson = JSON.parse(fileObject.contents.toString());
                     var transformedJson = Object.entries(untransformedJson).filter(function (_ref2) {
                         var _ref3 = _slicedToArray(_ref2, 2),
-                            key = _ref3[0],
                             value = _ref3[1];
 
                         return !value.endsWith('.' + sourcesType + '.map');
@@ -72,7 +71,7 @@ function purgeSourceMaps(_ref) {
                         return Object.assign(accumulator, _defineProperty({}, key, value));
                     }, {});
 
-                    fileObject.contents = new Buffer(JSON.stringify(transformedJson, null, 2));
+                    fileObject.contents = Buffer.from(JSON.stringify(transformedJson, null, 2));
 
                     this.push(fileObject);
 
