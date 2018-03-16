@@ -16,7 +16,10 @@ function purgeSourceMaps({sourcesType, manifestPath, sourcesPath}) {
 
         const sourcesStream = gulp
             .src(path.join(sourcesPath, `*.${sourcesType}`))
-            .pipe(decomment.text({trim: true}))
+            .pipe(decomment.text({
+                trim: true,
+                ignore: /url\([\w\s:\/=+;,."?-]*\)/g
+            }))
             .pipe(gulp.dest(sourcesPath));
         const manifestStream = gulp
             .src(manifestPath)

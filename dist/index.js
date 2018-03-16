@@ -51,7 +51,10 @@ function purgeSourceMaps(_ref) {
     return function () {
         (0, _del2.default)(_path2.default.join(sourcesPath, '*.' + sourcesType + '.map'));
 
-        var sourcesStream = _gulp2.default.src(_path2.default.join(sourcesPath, '*.' + sourcesType)).pipe(_gulpDecomment2.default.text({ trim: true })).pipe(_gulp2.default.dest(sourcesPath));
+        var sourcesStream = _gulp2.default.src(_path2.default.join(sourcesPath, '*.' + sourcesType)).pipe(_gulpDecomment2.default.text({
+            trim: true,
+            ignore: /url\([\w\s:\/=+;,."?-]*\)/g
+        })).pipe(_gulp2.default.dest(sourcesPath));
         var manifestStream = _gulp2.default.src(manifestPath).pipe(function () {
             return _through2.default.obj(function (fileObject, encoding, callback) {
                 if (!fileObject.isBuffer()) {
